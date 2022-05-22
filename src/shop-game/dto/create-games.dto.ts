@@ -34,12 +34,6 @@ export class CreateGameDto {
   @IsNotEmpty()
   @IsDate()
   @Type(() => Date)
-  // @MinLength(0, {
-  //   message: 'Send correct date, format dd/mm/yyyy.'
-  // })
-  // @MaxLength(10, {
-  //   message: 'Send correct date, format dd/mm/yyyy.'
-  // })
   @ApiProperty({description: 'Ano de lançamento do jogo.'})
   year: string;
 
@@ -52,7 +46,7 @@ export class CreateGameDto {
     message: 'Send your grade, betwen 0 and 5.',
   })
   @IsPositive()
-  @ApiProperty({description: 'Nota de avaliação do jogo', example: '0 para O  diei, 3 para Razoável, 5 para Jogo F@#$.'})
+  @ApiProperty({description: 'Nota de avaliação do jogo', example: '0 para Odiei, 3 para Razoável, 5 para Jogo F@#$.'})
   score: number;
 
   @IsNotEmpty()
