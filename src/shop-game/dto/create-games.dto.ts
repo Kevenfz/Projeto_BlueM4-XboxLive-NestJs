@@ -8,6 +8,7 @@ import {
   IsNotEmpty,
   IsString,
   IsDate,
+  IsUrl,
 } from 'class-validator';
 import {Type} from 'class-transformer';
 import { ApiProperty } from '@nestjs/swagger';
@@ -19,8 +20,8 @@ export class CreateGameDto {
   title: string;
 
   @IsNotEmpty()
-  @IsString()
-  @ApiProperty({description: 'Imagem de capa do jogo.'})
+  @IsUrl()
+  @ApiProperty({description: 'Imagem de capa do jogo.', example: 'https://s2.glbimg.com/pVUTlvwHrlm44bi3yyYTOElUzw8=/1200x/smart/filters:cover():strip_icc()/i.s3.glbimg.com/v1/AUTH_08fbf48bc0524877943fe86e43087e7a/internal_photos/bs/2021/1/9/8cOmg9TkaB2PgkS1sUjQ/2013-04-02-gta5-capa-rockstar-.jpg'})
   imgUrl: string;
 
   @IsNotEmpty()
@@ -28,13 +29,13 @@ export class CreateGameDto {
   @MaxLength(1300, {
     message: 'Description is too long!',
   })
-  @ApiProperty({description: 'Descrição do jogo.'})
+  @ApiProperty({description: 'Descrição do jogo.', example: 'Jogo de ação em mundo aberto, modo online sobrevivência, fps...'})
   description: string;
 
   @IsNotEmpty()
   @IsDate()
   @Type(() => Date)
-  @ApiProperty({description: 'Ano de lançamento do jogo.'})
+  @ApiProperty({description: 'Ano de lançamento do jogo.', example: '17 de Setembro de 2013'})
   year: string;
 
   @IsNotEmpty()
@@ -50,12 +51,12 @@ export class CreateGameDto {
   score: number;
 
   @IsNotEmpty()
-  @IsString()
-  @ApiProperty({description: 'Link do Trailler do jogo, apenas do YouTube.'})
+  @IsUrl()
+  @ApiProperty({description: 'Link do Trailler do jogo, apenas do YouTube.', example: 'https://www.youtube.com/watch?v=QkkoHAzjnUs'})
   traillerYtUrl: string;
 
   @IsNotEmpty()
-  @IsString()
-  @ApiProperty({description: 'Link da Gameplay do jogo, apenas do YouTube.'})
+  @IsUrl()
+  @ApiProperty({description: 'Link da Gameplay do jogo, apenas do YouTube.', example: 'https://www.youtube.com/watch?v=gHtKJ9cWCaA'})
   GplayYtUrl: string;
 }

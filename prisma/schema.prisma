@@ -8,21 +8,47 @@ datasource db {
 }
 
 model Games {
-  id String @id @default(uuid())
-  title String @unique
-  imgUrl String @unique
-  description String @unique
-  year String
-  score Int
-  traillerYtUrl String @unique
-  GplayYtUrl String @unique
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id            String   @id @default(uuid())
+  title         String   @unique
+  imgUrl        String   @unique @map("img_url")
+  description   String   @unique
+  year          String
+  score         Int
+  traillerYtUrl String   @unique @map("trailler_yt_url")
+  GplayYtUrl    String   @unique @map("gameplay_yt_url")
+  createdAt     DateTime @default(now()) @map("created_at")
+  updatedAt     DateTime @updatedAt @map("updated_at")
+
+  @@map("games")
 }
 
 model Genero {
-  id String @id @default(uuid())
-  genero String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id        String   @id @default(uuid())
+  genero    String
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("genero")
+}
+
+model User {
+  id        String   @id @default(uuid())
+  name      String   
+  email     String   @unique
+  password  String
+  cpf       Int      @unique
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("user")
+}
+
+model Profile {
+  id        String   @id @default(uuid())
+  title     String   @unique
+  imgUrl    String   @map("img_url")
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("profile")
 }

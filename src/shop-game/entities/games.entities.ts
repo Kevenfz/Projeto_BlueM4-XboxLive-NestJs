@@ -7,4 +7,6 @@ export class Game {
   score: number;
   traillerYtUrl: string;
   GplayYtUrl: string;
+  createdAt?: Date;
+  updatedAt?: Date;
 }
