@@ -7,24 +7,32 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Games {
-  id            String   @id @default(uuid())
-  title         String   @unique
-  imgUrl        String   @unique @map("img_url")
-  description   String   @unique
+model Game {
+  id            String @id @default(uuid())
+  title         String @unique
+  imgUrl        String @unique @map("img_url")
+  description   String @unique
   year          String
   score         Int
-  traillerYtUrl String   @unique @map("trailler_yt_url")
-  GplayYtUrl    String   @unique @map("gameplay_yt_url")
-  createdAt     DateTime @default(now()) @map("created_at")
-  updatedAt     DateTime @updatedAt @map("updated_at")
+  traillerYtUrl String @unique @map("trailler_yt_url")
+  GplayYtUrl    String @unique @map("gameplay_yt_url")
 
-  @@map("games")
+  generos Genero[]
+  Perfils Perfil[]
+  // favoritos Favorito[]
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("game")
 }
 
 model Genero {
-  id        String   @id @default(uuid())
-  genero    String
+  id     String @id @default(uuid())
+  genero String
+
+  game Game[]
+
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
 
@@ -32,23 +40,49 @@ model Genero {
 }
 
 model User {
-  id        String   @id @default(uuid())
-  name      String   
-  email     String   @unique
-  password  String
-  cpf       Int      @unique
+  id       String @id @default(uuid())
+  name     String
+  email    String @unique
+  password String
+  cpf      String @unique
+  isAdmin  String @map("is_admin")
+
+  perfis Perfil[]
+  // Favorito Favorito[]
+
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
 
   @@map("user")
 }
 
-model Profile {
-  id        String   @id @default(uuid())
-  title     String   @unique
-  imgUrl    String   @map("img_url")
+model Perfil {
+  id     String @id @default(uuid())
+  title  String @unique
+  imgUrl String @map("img_url")
+
+  user   User   @relation(fields: [userId], references: [id])
+  userId String @map("user_id")
+  game   Game[]
+  // favoritos Favorito[]
+
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
 
-  @@map("profile")
+
+  @@map("perfil")
 }
+
+// model Favorito {
+//   id String @id @default(uuid())
+
+//   user    User     @relation(fields: [userId], references: [id])
+//   userId  String   @map("user_id")
+//   Perfils Perfil[]
+//   game    Game[]
+
+//   createdAt DateTime @default(now()) @map("created_at")
+//   updatedAt DateTime @updatedAt @map("updated_at")
+
+//   @@map("order")
+// }

@@ -9,7 +9,7 @@ import {
   Patch,
   Post,
 } from '@nestjs/common';
-import { ShopGameService } from './shop-game.service';
+import { GameService } from './game.service';
 import { CreateGameDto } from './dto/create-games.dto';
 import { Game } from './entities/games.entities';
 import { ApiTags, ApiOperation } from '@nestjs/swagger';
@@ -17,25 +17,25 @@ import { UpdateGamesDto } from './dto/update-games.dto';
 
 @ApiTags('shop-game')
 @Controller('shop-game')
-export class ShopGameController {
-  constructor(private shopGameService: ShopGameService) {}
+export class GameController {
+  constructor(private gameService: GameService) {}
 
   @Get()
   @ApiOperation({ summary: 'Listar todos os jogos' })
   findAll() {
-    return this.shopGameService.findAll();
+    return this.gameService.findAll();
   }
 
   @Get(':id')
   @ApiOperation({ summary: 'Buscar jogos pelo seu ID' })
   findById(@Param('id') id: string): Promise<Game> {
-    return this.shopGameService.findById(id);
+    return this.gameService.findById(id);
   }
 
   @Post()
   @ApiOperation({ summary: 'Criar um jogo' })
   create(@Body() createGameDto: CreateGameDto) {
-    return this.shopGameService.create(createGameDto);
+    return this.gameService.create(createGameDto);
   }
 
   @Patch(':id')
@@ -44,13 +44,13 @@ export class ShopGameController {
     @Param('id') id: string,
     @Body() updateGameDto: UpdateGamesDto,
   ): Promise<Game> {
-    return this.shopGameService.update(id, updateGameDto);
+    return this.gameService.update(id, updateGameDto);
   }
 
   @Delete(':id')
   @HttpCode(HttpStatus.NO_CONTENT)
   @ApiOperation({ summary: 'Deletar um jogo pelo seu ID' })
   delete(@Param('id') id: string) {
-    this.shopGameService.delete(id);
+    this.gameService.delete(id);
   }
 }

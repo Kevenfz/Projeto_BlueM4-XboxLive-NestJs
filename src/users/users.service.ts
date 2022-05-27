@@ -18,6 +18,7 @@ export class UserService {
     email: true,
     password: false,
     cpf: true,
+    isAdmin: true,
     createdAt: true,
     updatedAt: true,
   };

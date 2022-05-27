@@ -44,5 +44,12 @@ export class CreateUserDto {
     description: 'CPF do usuário',
     example: 'xxx.xxx.xxx-xx',
   })
-  cpf: number;
+  cpf: string;
+
+  @IsString()
+  @ApiProperty({
+    description: 'Usuário administrador',
+    example: 'Todas permissões de controle liberadas para usuários administradores',
+  })
+  isAdmin: string;
 }

@@ -5,15 +5,15 @@ import { PrismaService } from 'src/prisma/prisma.service';
 import { UpdateGamesDto } from './dto/update-games.dto';
 
 @Injectable()
-export class ShopGameService {
+export class GameService {
   constructor(private readonly prisma: PrismaService) {}
 
   findAll(): Promise<Game[]> {
-    return this.prisma.games.findMany();
+    return this.prisma.game.findMany();
   }
 
   async findById(id: string): Promise<Game> {
-    const record = await this.prisma.games.findUnique({ where: { id } });
+    const record = await this.prisma.game.findUnique({ where: { id } });
 
     if (!record) {
       throw new NotFoundException(`Registro com o id:${id} não encontrado.`);
@@ -24,7 +24,7 @@ export class ShopGameService {
 
   create(createGameDto: CreateGameDto): Promise<Game> {
     const game: Game = { ...createGameDto };
-    return this.prisma.games
+    return this.prisma.game
       .create({
         data: game,
       })
@@ -36,7 +36,7 @@ export class ShopGameService {
 
     const data: Partial<Game> = { ...updateGameDto };
 
-    return this.prisma.games.update({
+    return this.prisma.game.update({
       where: { id },
       data,
     });
@@ -45,7 +45,7 @@ export class ShopGameService {
   async delete(id: string) {
     await this.findById(id);
 
-    await this.prisma.games.delete({ where: { id } });
+    await this.prisma.game.delete({ where: { id } });
   }
 
   handleError(error: Error) {
