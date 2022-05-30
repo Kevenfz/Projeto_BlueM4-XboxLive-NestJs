@@ -3,6 +3,7 @@ import { CreateGeneroDto } from './dto/create-genero.dto';
 import { Genero } from './entities/genero.entities';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { UpdateGeneroDto } from './dto/update-genero.dto';
+import { handleError } from 'src/utils/handle.error.util';
 
 @Injectable()
 export class GeneroService {
@@ -23,18 +24,18 @@ export class GeneroService {
   }
 
   create(createGeneroDto: CreateGeneroDto): Promise<Genero> {
-    const genero: Genero = { ...createGeneroDto };
+    const genero = { ...createGeneroDto };
     return this.prisma.genero
       .create({
         data: genero,
       })
-      .catch(this.handleError);
+      .catch(handleError);
   }
 
   async update(id: string, updateGeneroDto: UpdateGeneroDto): Promise<Genero> {
     await this.findById(id);
 
-    const data: Partial<Genero> = { ...updateGeneroDto };
+    const data = { ...updateGeneroDto };
 
     return this.prisma.genero.update({
       where: { id },

@@ -17,8 +17,8 @@ model Game {
   traillerYtUrl String @unique @map("trailler_yt_url")
   GplayYtUrl    String @unique @map("gameplay_yt_url")
 
-  generos Genero[]
-  Perfils Perfil[]
+  genero Genero[]
+  perfil Perfil[]
   // favoritos Favorito[]
 
   createdAt DateTime @default(now()) @map("created_at")
@@ -40,15 +40,13 @@ model Genero {
 }
 
 model User {
-  id       String @id @default(uuid())
+  id       String   @id @default(uuid())
   name     String
-  email    String @unique
+  email    String   @unique
   password String
-  cpf      String @unique
-  isAdmin  String @map("is_admin")
-
-  perfis Perfil[]
-  // Favorito Favorito[]
+  cpf      String   @unique
+  isAdmin  String   @map("is_admin")
+  perfil   Perfil[]
 
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
@@ -76,13 +74,11 @@ model Perfil {
 // model Favorito {
 //   id String @id @default(uuid())
 
-//   user    User     @relation(fields: [userId], references: [id])
-//   userId  String   @map("user_id")
-//   Perfils Perfil[]
 //   game    Game[]
+//   perfil Perfil[]
 
 //   createdAt DateTime @default(now()) @map("created_at")
 //   updatedAt DateTime @updatedAt @map("updated_at")
 
-//   @@map("order")
+//   @@map("favorito")
 // }

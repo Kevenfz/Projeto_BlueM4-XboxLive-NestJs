@@ -3,6 +3,7 @@ import { CreateGameDto } from './dto/create-games.dto';
 import { Game } from './entities/games.entities';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { UpdateGamesDto } from './dto/update-games.dto';
+import { handleError } from 'src/utils/handle.error.util';
 
 @Injectable()
 export class GameService {
@@ -28,7 +29,7 @@ export class GameService {
       .create({
         data: game,
       })
-      .catch(this.handleError);
+      .catch(handleError);
   }
 
   async update(id: string, updateGameDto: UpdateGamesDto): Promise<Game> {
@@ -47,9 +48,6 @@ export class GameService {
 
     await this.prisma.game.delete({ where: { id } });
   }
-
-  handleError(error: Error) {
-    console.log(error.message);
-    return undefined;
-  }
 }
+
+3

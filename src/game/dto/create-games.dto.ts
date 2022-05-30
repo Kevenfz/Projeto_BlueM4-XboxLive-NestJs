@@ -9,6 +9,7 @@ import {
   IsString,
   IsDate,
   IsUrl,
+  IsUUID,
 } from 'class-validator';
 import {Type} from 'class-transformer';
 import { ApiProperty } from '@nestjs/swagger';
@@ -33,9 +34,8 @@ export class CreateGameDto {
   description: string;
 
   @IsNotEmpty()
-  @IsDate()
-  @Type(() => Date)
-  @ApiProperty({description: 'Ano de lançamento do jogo.', example: '17 de Setembro de 2013'})
+  @IsString()
+  @ApiProperty({description: 'Ano de lançamento do jogo.', example: '17/10/2013'})
   year: string;
 
   @IsNotEmpty()
@@ -59,4 +59,21 @@ export class CreateGameDto {
   @IsUrl()
   @ApiProperty({description: 'Link da Gameplay do jogo, apenas do YouTube.', example: 'https://www.youtube.com/watch?v=gHtKJ9cWCaA'})
   GplayYtUrl: string;
+
+  @IsUUID(undefined, {each: true})
+  @ApiProperty({
+    description: 'Lista com os IDs dos Perfis',
+    example:
+      '["186a7c97-a030-4737-b318-59ae048d0052", "ea4999af-0ced-4e11-abeb-8bf0de0c5d36"]',
+  })
+  perfilId: string[];
+
+  @IsUUID(undefined, {each: true})
+  @ApiProperty({
+    description: 'Lista com os IDs dos Generos',
+    example:
+      '["186a7c97-a030-4737-b318-59ae048d0052", "ea4999af-0ced-4e11-abeb-8bf0de0c5d36"]',
+  })
+  generoId: string[];
+
 }

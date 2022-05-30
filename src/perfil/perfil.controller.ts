@@ -28,7 +28,7 @@ export class PerfilController {
 
   @Get(':id')
   @ApiOperation({ summary: 'Buscar Perfis pelo seu ID' })
-  findById(@Param('id') id: string): Promise<Perfil> {
+  findById(@Param('id') id: string) {
     return this.perfilService.findById(id);
   }
 
@@ -43,7 +43,7 @@ export class PerfilController {
   update(
     @Param('id') id: string,
     @Body() updatePerfilDto: UpdatePerfilDto,
-  ): Promise<Perfil> {
+  ) {
     return this.perfilService.update(id, updatePerfilDto);
   }
 
