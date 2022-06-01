@@ -39,7 +39,7 @@ export class PerfilController {
   }
 
   @Patch(':id')
-  @ApiOperation({ summary: 'Atualizar um Perfil pelo seu ID' })
+  @ApiOperation({ summary: 'Atualizar um Perfil pelo seu ID. Possibilidade de remover os jogos favoritados' })
   update(
     @Param('id') id: string,
     @Body() updatePerfilDto: UpdatePerfilDto,

@@ -6,10 +6,9 @@ import { PrismaModule } from './prisma/prisma.module';
 import { GeneroModule } from './genero/genero.module';
 import { UsersModule } from './users/users.module';
 import { PerfilModule } from './perfil/perfil.module';
-import { FavoritosModule } from './favoritos/favoritos.module';
 
 @Module({
-  imports: [ShopGameModule, PrismaModule, GeneroModule, UsersModule, PerfilModule, FavoritosModule],
+  imports: [ShopGameModule, PrismaModule, GeneroModule, UsersModule, PerfilModule],
   controllers: [AppController],
   providers: [AppService],
 })

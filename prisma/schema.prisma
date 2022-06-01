@@ -19,7 +19,6 @@ model Game {
 
   genero Genero[]
   perfil Perfil[]
-  // favoritos Favorito[]
 
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
@@ -62,7 +61,6 @@ model Perfil {
   user   User   @relation(fields: [userId], references: [id])
   userId String @map("user_id")
   game   Game[]
-  // favoritos Favorito[]
 
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
@@ -70,15 +68,3 @@ model Perfil {
 
   @@map("perfil")
 }
-
-// model Favorito {
-//   id String @id @default(uuid())
-
-//   game    Game[]
-//   perfil Perfil[]
-
-//   createdAt DateTime @default(now()) @map("created_at")
-//   updatedAt DateTime @updatedAt @map("updated_at")
-
-//   @@map("favorito")
-// }

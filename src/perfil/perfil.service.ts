@@ -24,7 +24,11 @@ export class PerfilService {
           select: {
             title: true,
             imgUrl: true,
-            genero: true,
+            genero: {
+              select: {
+                genero: true,
+              }
+            },
           },
         },
       },
@@ -85,7 +89,11 @@ export class PerfilService {
             select: {
               title: true,
               imgUrl: true,
-              genero: true,
+              genero: {
+                select: {
+                  genero: true,
+                }
+              },
             },
           },
         },
