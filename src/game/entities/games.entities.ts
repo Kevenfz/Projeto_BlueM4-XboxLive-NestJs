@@ -10,8 +10,6 @@ export class Game {
   score: number;
   traillerYtUrl: string;
   GplayYtUrl: string;
-  perfil?: Perfil[];
-  genero?: Genero[];
   createdAt?: Date;
   updatedAt?: Date;
 }

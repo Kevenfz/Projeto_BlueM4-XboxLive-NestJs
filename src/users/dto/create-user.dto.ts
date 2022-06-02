@@ -1,7 +1,9 @@
 import { ApiProperty } from '@nestjs/swagger';
 import {
+  IsEmail,
   IsNotEmpty,
   IsNumber,
+  IsPositive,
   IsString,
   IsUUID,
   Matches,
@@ -17,7 +19,7 @@ export class CreateUserDto {
   })
   name: string;
 
-  @IsString()
+  @IsEmail()
   @IsNotEmpty()
   @ApiProperty({
     description: 'Email do usuário',
@@ -26,6 +28,7 @@ export class CreateUserDto {
   email: string;
 
   @IsString()
+  @IsNotEmpty()
   @ApiProperty({
     description: 'Senha de usuário para login',
     example: 'Batatinha@12345',
@@ -40,12 +43,13 @@ export class CreateUserDto {
   confirmPassword: string;
 
   @IsNumber()
+  @IsPositive()
   @IsNotEmpty()
   @ApiProperty({
     description: 'CPF do usuário',
-    example: 'xxx.xxx.xxx-xx',
+    example: '123.456.789-10',
   })
-  cpf: string;
+  cpf: number;
 
   @IsString()
   @ApiProperty({
@@ -54,11 +58,11 @@ export class CreateUserDto {
   })
   isAdmin: string;
 
-  @IsUUID(undefined, {each: true})
-  @ApiProperty({
-    description: 'Lista com os IDs dos Perfis',
-    example:
-      '["186a7c97-a030-4737-b318-59ae048d0052", "ea4999af-0ced-4e11-abeb-8bf0de0c5d36"]',
-  })
-  perfilId: string[];
+  // @IsUUID(undefined, {each: true})
+  // @ApiProperty({
+  //   description: 'Lista com os IDs dos Perfis',
+  //   example:
+  //     '["186a7c97-a030-4737-b318-59ae048d0052", "ea4999af-0ced-4e11-abeb-8bf0de0c5d36"]',
+  // })
+  // perfilId: string[];
 }

@@ -60,20 +60,4 @@ export class CreateGameDto {
   @ApiProperty({description: 'Link da Gameplay do jogo, apenas do YouTube.', example: 'https://www.youtube.com/watch?v=gHtKJ9cWCaA'})
   GplayYtUrl: string;
 
-  @IsUUID(undefined, {each: true})
-  @ApiProperty({
-    description: 'Lista com os IDs dos Perfis',
-    example:
-      '["186a7c97-a030-4737-b318-59ae048d0052", "ea4999af-0ced-4e11-abeb-8bf0de0c5d36"]',
-  })
-  perfilId: string[];
-
-  @IsUUID(undefined, {each: true})
-  @ApiProperty({
-    description: 'Lista com os IDs dos Generos',
-    example:
-      '["186a7c97-a030-4737-b318-59ae048d0052", "ea4999af-0ced-4e11-abeb-8bf0de0c5d36"]',
-  })
-  generoId: string[];
-
 }

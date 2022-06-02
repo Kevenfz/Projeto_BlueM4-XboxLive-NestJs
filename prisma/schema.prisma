@@ -28,7 +28,7 @@ model Game {
 
 model Genero {
   id     String @id @default(uuid())
-  genero String
+  genero String @unique
 
   game Game[]
 
@@ -43,7 +43,7 @@ model User {
   name     String
   email    String   @unique
   password String
-  cpf      String   @unique
+  cpf      Int   @unique
   isAdmin  String   @map("is_admin")
   perfil   Perfil[]
 
