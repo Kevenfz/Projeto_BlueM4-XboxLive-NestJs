@@ -1,27 +1,25 @@
-import { ApiProperty } from "@nestjs/swagger";
-import { IsNotEmpty, IsString, IsUUID, MaxLength } from "class-validator";
+import { ApiProperty } from '@nestjs/swagger';
+import { IsNotEmpty, IsString, IsUUID, MaxLength } from 'class-validator';
 
 export class CreatePerfilDto {
   @IsString()
   @IsNotEmpty()
   @MaxLength(15)
-  @ApiProperty({description: 'Nome do perfil de usuário', example: 'Fulano123'})
+  @ApiProperty({
+    description: 'Nome do perfil de usuário',
+    example: 'Fulano123',
+  })
   title: string;
-
 
   @IsString()
   @IsNotEmpty()
-  @ApiProperty({description: 'Imagem do perfil de usuário', example: 'Qualquer imagem de escolha do usuário, tanto web quanto local.'})
+  @ApiProperty({
+    description: 'Imagem do perfil de usuário',
+    example: 'Qualquer imagem de escolha do usuário, tanto web quanto local.',
+  })
   imgUrl: string;
 
-  @IsUUID()
-  @ApiProperty({
-    description: 'ID do usuário que está favoritando o jogo',
-    example: '186a7c97-a030-4737-b318-59ae048d0052',
-  })
-  userId: string;
-
-  @IsUUID(undefined, {each: true})
+  @IsUUID(undefined, { each: true })
   @ApiProperty({
     description: 'Lista com os IDs dos produtos',
     example:

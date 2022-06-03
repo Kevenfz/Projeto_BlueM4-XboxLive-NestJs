@@ -57,15 +57,15 @@ export class PerfilService {
     });
   }
 
-  create(createPerfilDto: CreatePerfilDto) {
+  create(userId: string, createPerfilDto: CreatePerfilDto) {
     const data: Prisma.PerfilCreateInput = {
-      title: createPerfilDto.title,
-      imgUrl: createPerfilDto.imgUrl,
       user: {
         connect: {
-          id: createPerfilDto.userId,
+          id: userId,
         },
       },
+      title: createPerfilDto.title,
+      imgUrl: createPerfilDto.imgUrl,
       game: {
         connect: createPerfilDto.games.map((gameId) => ({
           id: gameId,
@@ -77,14 +77,16 @@ export class PerfilService {
       .create({
         data,
         select: {
+          user: {
+            select: {
+              id: true,
+              name: true,
+              isAdmin: true,
+            },
+          },
           id: true,
           imgUrl: true,
           title: true,
-          user: {
-            select: {
-              name: true,
-            },
-          },
           game: {
             select: {
               title: true,
@@ -101,8 +103,8 @@ export class PerfilService {
       .catch(handleError);
   }
 
-  update(id: string, updatePerfilDto: UpdatePerfilDto) {
-    this.findById(id);
+  async update(id: string, updatePerfilDto: UpdatePerfilDto) {
+    await this.findById(id);
     const data: Prisma.PerfilUpdateInput = {
       title: updatePerfilDto.title,
       imgUrl: updatePerfilDto.imgUrl,

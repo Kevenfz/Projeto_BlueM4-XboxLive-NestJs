@@ -8,14 +8,20 @@ import {
   Param,
   Patch,
   Post,
+  UseGuards,
 } from '@nestjs/common';
 import { PerfilService } from './perfil.service';
 import { CreatePerfilDto } from './dto/create-perfil.dto';
 import { Perfil } from './entities/perfil.entity';
-import { ApiTags, ApiOperation } from '@nestjs/swagger';
+import { ApiTags, ApiOperation, ApiBearerAuth } from '@nestjs/swagger';
 import { UpdatePerfilDto } from './dto/update-perfil.dto';
+import { AuthGuard } from '@nestjs/passport';
+import { LoggedUser } from 'src/auth/logged-user.decorator';
+import { User } from '@prisma/client';
 
 @ApiTags('perfil')
+@UseGuards(AuthGuard())
+@ApiBearerAuth()
 @Controller('perfil')
 export class PerfilController {
   constructor(private perfilService: PerfilService) {}
@@ -34,16 +40,16 @@ export class PerfilController {
 
   @Post()
   @ApiOperation({ summary: 'Criar um Perfil' })
-  create(@Body() createPerfilDto: CreatePerfilDto) {
-    return this.perfilService.create(createPerfilDto);
+  create(@LoggedUser() user: User, @Body() createPerfilDto: CreatePerfilDto) {
+    return this.perfilService.create(user.id, createPerfilDto);
   }
 
   @Patch(':id')
-  @ApiOperation({ summary: 'Atualizar um Perfil pelo seu ID. Possibilidade de remover os jogos favoritados' })
-  update(
-    @Param('id') id: string,
-    @Body() updatePerfilDto: UpdatePerfilDto,
-  ) {
+  @ApiOperation({
+    summary:
+      'Atualizar um Perfil pelo seu ID. Possibilidade de remover os jogos favoritados',
+  })
+  update(@Param('id') id: string, @Body() updatePerfilDto: UpdatePerfilDto) {
     return this.perfilService.update(id, updatePerfilDto);
   }
 

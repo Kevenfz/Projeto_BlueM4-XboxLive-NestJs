@@ -8,14 +8,18 @@ import {
   Param,
   Patch,
   Post,
+  UseGuards,
 } from '@nestjs/common';
 import { GameService } from './game.service';
 import { CreateGameDto } from './dto/create-games.dto';
 import { Game } from './entities/games.entities';
-import { ApiTags, ApiOperation } from '@nestjs/swagger';
+import { ApiTags, ApiOperation, ApiBearerAuth } from '@nestjs/swagger';
 import { UpdateGamesDto } from './dto/update-games.dto';
+import { AuthGuard } from '@nestjs/passport';
 
 @ApiTags('game')
+@UseGuards(AuthGuard())
+@ApiBearerAuth()
 @Controller('game')
 export class GameController {
   constructor(private gameService: GameService) {}
@@ -28,7 +32,7 @@ export class GameController {
 
   @Get(':id')
   @ApiOperation({ summary: 'Buscar jogos pelo seu ID' })
-  findById(@Param('id') id: string): Promise<Game> {
+  findById(@Param('id') id: string) {
     return this.gameService.findById(id);
   }
 
@@ -43,7 +47,7 @@ export class GameController {
   update(
     @Param('id') id: string,
     @Body() updateGameDto: UpdateGamesDto,
-  ): Promise<Game> {
+  ) {
     return this.gameService.update(id, updateGameDto);
   }
 

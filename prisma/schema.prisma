@@ -43,7 +43,7 @@ model User {
   name     String
   email    String   @unique
   password String
-  cpf      Int   @unique
+  cpf      Int      @unique
   isAdmin  String   @map("is_admin")
   perfil   Perfil[]
 

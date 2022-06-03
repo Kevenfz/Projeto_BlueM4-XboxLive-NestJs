@@ -1,5 +1,4 @@
 import { Genero } from "src/genero/entities/genero.entities";
-import { Perfil } from "src/perfil/entities/perfil.entity";
 
 export class Game {
   id?: string;
@@ -10,6 +9,7 @@ export class Game {
   score: number;
   traillerYtUrl: string;
   GplayYtUrl: string;
+  genero: Genero[];
   createdAt?: Date;
   updatedAt?: Date;
 }

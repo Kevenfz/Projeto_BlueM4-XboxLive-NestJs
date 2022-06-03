@@ -21,6 +21,14 @@ export class AuthService {
       throw new UnauthorizedException('Credenciais inválidas');
     }
 
+    // const admin = await this.prisma.user.findUnique({
+    //   where: {}
+    // })
+
+    // if (!admin) {
+    //   throw new UnauthorizedException('Usuário não é um administrador');
+    // }
+
     const isHashValid = await bcrypt.compare(password, user.password);
 
     if (!isHashValid) {

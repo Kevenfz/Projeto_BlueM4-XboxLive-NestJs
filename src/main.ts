@@ -4,7 +4,7 @@ import { AppModule } from './app.module';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create(AppModule, { cors: true });
 
   app.useGlobalPipes(new ValidationPipe());
 
@@ -13,11 +13,11 @@ async function bootstrap() {
     .setDescription('Aplicação para gestão da plataforma de jogos')
     .setVersion('1.0.0')
     .addTag('status')
-    .addTag('game')
-    .addTag('user')
-    .addTag('genero')
-    .addTag('perfil')
     .addTag('auth')
+    .addTag('user')
+    .addTag('perfil')
+    .addTag('game')
+    .addTag('genero')
     .addBearerAuth()
     .build();
 
