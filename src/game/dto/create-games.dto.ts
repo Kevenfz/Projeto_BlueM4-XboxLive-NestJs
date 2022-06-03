@@ -36,7 +36,7 @@ export class CreateGameDto {
   })
   @ApiProperty({
     description: 'Descrição do jogo.',
-    example: 'Jogo de ação em mundo aberto, modo online sobrevivência, fps...',
+    example: 'Grand Theft Auto V é um jogo eletrônico de ação-aventura que pode ser jogado a partir de uma perspectiva em terceira pessoa ou primeira pessoa.',
   })
   description: string;
 

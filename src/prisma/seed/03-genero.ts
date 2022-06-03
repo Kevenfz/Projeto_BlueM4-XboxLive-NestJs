@@ -1,0 +1,31 @@
+import { Prisma, PrismaClient } from '@prisma/client';
+
+export const generos: Prisma.GeneroCreateInput[] = [
+  {
+    genero: 'Ação-aventura',
+  },
+  {
+    genero: 'FPS',
+  },
+  {
+    genero: 'Aventura',
+  },
+  {
+    genero: 'Jogo eletrônico de simulação',
+  },
+  {
+    genero: 'Jogo eletrônico de esporte',
+  },
+];
+
+export const genero = async (prisma: PrismaClient) => {
+  for (const obj of Object.values(generos)) {
+    await prisma.genero.upsert({
+      where: { genero: obj.genero },
+      update: {},
+      create: {
+        ...obj,
+      },
+    });
+  }
+};
