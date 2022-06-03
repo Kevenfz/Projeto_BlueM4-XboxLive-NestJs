@@ -11,10 +11,16 @@ export const generos: Prisma.GeneroCreateInput[] = [
     genero: 'Aventura',
   },
   {
-    genero: 'Jogo eletrônico de simulação',
+    genero: 'Simulação',
   },
   {
-    genero: 'Jogo eletrônico de esporte',
+    genero: 'Esporte',
+  },
+  {
+    genero: 'Survivor horror',
+  },
+  {
+    genero: 'Tiro em terceira pessoa',
   },
 ];
 
