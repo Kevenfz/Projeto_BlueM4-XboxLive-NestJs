@@ -1,15 +1,14 @@
 import { ApiProperty } from '@nestjs/swagger';
 import {
+  IsBoolean,
   IsEmail,
+  IsEmpty,
   IsInt,
   IsNotEmpty,
   IsNumber,
   IsPositive,
   IsString,
   Matches,
-  Max,
-  MaxLength,
-  Min,
   MinLength,
 } from 'class-validator';
 
@@ -23,6 +22,7 @@ export class CreateUserDto {
   name: string;
 
   @IsEmail()
+  @IsString()
   @IsNotEmpty()
   @ApiProperty({
     description: 'Email do usuário',
@@ -45,20 +45,22 @@ export class CreateUserDto {
   @ApiProperty({ description: 'Confirmação da Senha do usuário para o login' })
   confirmPassword: string;
 
-  @IsNumber()
-  @IsInt()
-  @IsPositive()
+  @IsString()
   @IsNotEmpty()
+  @Matches(/([0-9]{2}[\.]?[0-9]{3}[\.]?[0-9]{3}[\/]?[0-9]{4}[-]?[0-9]{2})|([0-9]{3}[\.]?[0-9]{3}[\.]?[0-9]{3}[-]?[0-9]{2})/, {
+    message: 'Formato CPF inválido'
+  })
   @ApiProperty({
     description: 'CPF do usuário',
-    example: 'Onze caracteres: 12345678910',
+    example: '111.222.333-44',
   })
-  cpf: number;
+  cpf: string;
 
-  @IsString()
+
   @ApiProperty({
-    description: 'Usuário administrador',
-    example: 'Todas permissões de controle liberadas para usuários administradores',
+    required: false,
+    default: false,
+    example: false,
   })
-  isAdmin: string;
+  isAdmin?: boolean;
 }

@@ -3,15 +3,12 @@ import {
   Min,
   Max,
   MaxLength,
-  MinLength,
   IsPositive,
   IsNotEmpty,
   IsString,
-  IsDate,
   IsUrl,
   IsUUID,
 } from 'class-validator';
-import { Type } from 'class-transformer';
 import { ApiProperty } from '@nestjs/swagger';
 
 export class CreateGameDto {
@@ -36,7 +33,8 @@ export class CreateGameDto {
   })
   @ApiProperty({
     description: 'Descrição do jogo.',
-    example: 'Grand Theft Auto V é um jogo eletrônico de ação-aventura que pode ser jogado a partir de uma perspectiva em terceira pessoa ou primeira pessoa.',
+    example:
+      'Grand Theft Auto V é um jogo eletrônico de ação-aventura que pode ser jogado a partir de uma perspectiva em terceira pessoa ou primeira pessoa.',
   })
   description: string;
 
@@ -82,7 +80,8 @@ export class CreateGameDto {
   @IsUUID(undefined, { each: true })
   @ApiProperty({
     description: 'Genero do jogo',
-    example: '["186a7c97-a030-4737-b318-59ae048d0052", "ea4999af-0ced-4e11-abeb-8bf0de0c5d36"]',
+    example:
+      '["186a7c97-a030-4737-b318-59ae048d0052", "ea4999af-0ced-4e11-abeb-8bf0de0c5d36"]',
   })
   genero: string[];
 }

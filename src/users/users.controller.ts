@@ -4,6 +4,8 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { ApiBearerAuth, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { AuthGuard } from '@nestjs/passport';
+import { LoggedUser } from 'src/auth/logged-user.decorator';
+import { User } from './entities/user.entity';
 
 @ApiTags('user')
 @Controller('user')
@@ -20,24 +22,24 @@ export class UserController {
   @UseGuards(AuthGuard())
   @ApiBearerAuth()
   @ApiOperation({summary: 'Listar todos os usuários'})
-  findAll() {
-    return this.userService.findAll();
+  findAll(@LoggedUser() user: User) {
+    return this.userService.findAll(user);
   }
 
   @Get(':id')
   @UseGuards(AuthGuard())
   @ApiBearerAuth()
   @ApiOperation({summary: 'Listar um usuário pelo seu ID'})
-  findOne(@Param('id') id: string) {
-    return this.userService.findOne(id);
+  findOne(@LoggedUser() user: User, @Param('id') id: string) {
+    return this.userService.findOne(user, id);
   }
 
   @Patch(':id')
   @UseGuards(AuthGuard())
   @ApiBearerAuth()
   @ApiOperation({summary: 'Atualizar um usuário pelo seu ID'})
-  update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
-    return this.userService.update(id, updateUserDto);
+  update(@LoggedUser() user: User, @Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
+    return this.userService.update(user, id, updateUserDto);
   }
 
   @Delete(':id')
@@ -45,7 +47,7 @@ export class UserController {
   @ApiBearerAuth()
   @HttpCode(HttpStatus.NO_CONTENT)
   @ApiOperation({summary: 'Deletar um usuário pelo seu ID'})
-  delete(@Param('id') id: string) {
-    return this.userService.delete(id);
+  delete(@LoggedUser() user: User, @Param('id') id: string) {
+    return this.userService.delete(user, id);
   }
 }

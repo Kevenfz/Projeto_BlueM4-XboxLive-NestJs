@@ -39,13 +39,14 @@ model Genero {
 }
 
 model User {
-  id       String   @id @default(uuid())
+  id       String @id @default(uuid())
   name     String
-  email    String   @unique
+  email    String @unique
   password String
-  cpf      Int      @unique
-  isAdmin  String   @map("is_admin")
-  perfil   Perfil[]
+  cpf      String    @unique
+  isAdmin  Boolean @map("is_admin") @default(false)
+
+  perfil Perfil[]
 
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")

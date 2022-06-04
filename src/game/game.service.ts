@@ -1,16 +1,24 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  Injectable,
+  NotFoundException,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { CreateGameDto } from './dto/create-games.dto';
 import { Game } from './entities/games.entities';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { UpdateGamesDto } from './dto/update-games.dto';
 import { handleError } from 'src/utils/handle.error.util';
 import { Prisma } from '@prisma/client';
+import { User } from 'src/users/entities/user.entity';
+
+//TODO: userSelect para todos os componentes e assim limpar mais o código!!!
 
 @Injectable()
 export class GameService {
   constructor(private readonly prisma: PrismaService) {}
 
   findAll() {
+
     return this.prisma.game.findMany({
       select: {
         id: true,
@@ -31,6 +39,7 @@ export class GameService {
   }
 
   async findById(id: string) {
+
     const record = await this.prisma.game.findUnique({
       where: { id },
       select: {
@@ -57,7 +66,14 @@ export class GameService {
     return record;
   }
 
-  create(createGameDto: CreateGameDto) {
+  create(user: User, createGameDto: CreateGameDto) {
+
+    if (!user.isAdmin) {
+      throw new UnauthorizedException(
+        'Acesso negado: Sua conta não é do tipo Admin!',
+      );
+    }
+
     const data: Prisma.GameCreateInput = {
       title: createGameDto.title,
       imgUrl: createGameDto.imgUrl,
@@ -95,8 +111,14 @@ export class GameService {
       .catch(handleError);
   }
 
-  async update(id: string, updateGameDto: UpdateGamesDto) {
+  async update(user: User, id: string, updateGameDto: UpdateGamesDto) {
     await this.findById(id);
+
+    if (!user.isAdmin) {
+      throw new UnauthorizedException(
+        'Acesso negado: Sua conta não é do tipo Admin!',
+      );
+    }
 
     const data: Prisma.GameUpdateInput = {
       title: updateGameDto.title,
@@ -127,6 +149,7 @@ export class GameService {
         GplayYtUrl: true,
         genero: {
           select: {
+            id: true,
             genero: true,
           },
         },
@@ -134,8 +157,14 @@ export class GameService {
     });
   }
 
-  async delete(id: string) {
+  async delete(user: User, id: string) {
     await this.findById(id);
+
+    if (!user.isAdmin) {
+      throw new UnauthorizedException(
+        'Acesso negado: Sua conta não é do tipo Admin!',
+      );
+    }
 
     await this.prisma.game.delete({ where: { id } });
   }

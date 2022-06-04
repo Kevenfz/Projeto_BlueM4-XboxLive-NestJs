@@ -27,13 +27,15 @@ export class PerfilService {
             genero: {
               select: {
                 genero: true,
-              }
+              },
             },
           },
         },
       },
     });
   }
+
+  //
 
   findById(id: string) {
     return this.prisma.perfil.findUnique({
@@ -56,6 +58,8 @@ export class PerfilService {
       },
     });
   }
+
+  //
 
   create(userId: string, createPerfilDto: CreatePerfilDto) {
     const data: Prisma.PerfilCreateInput = {
@@ -94,7 +98,7 @@ export class PerfilService {
               genero: {
                 select: {
                   genero: true,
-                }
+                },
               },
             },
           },
@@ -102,6 +106,8 @@ export class PerfilService {
       })
       .catch(handleError);
   }
+
+  //
 
   async update(id: string, updatePerfilDto: UpdatePerfilDto) {
     await this.findById(id);
@@ -136,6 +142,8 @@ export class PerfilService {
       },
     });
   }
+
+  //
 
   async delete(id: string) {
     await this.findById(id);

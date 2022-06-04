@@ -2,7 +2,7 @@ import {
   BadRequestException,
   Injectable,
   NotFoundException,
-  UnprocessableEntityException,
+  UnauthorizedException,
 } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { User } from './entities/user.entity';
@@ -26,54 +26,77 @@ export class UserService {
 
   constructor(private readonly prisma: PrismaService) {}
 
-  findAll(): Promise<User[]> {
-    return this.prisma.user.findMany({ select: this.userSelect });
+  async findAll(user: User): Promise<User[]> {
+    if (!user.isAdmin) {
+      throw new UnauthorizedException(
+        'Acesso negado: Sua conta não é do tipo Admin!',
+      );
+    }
+
+    return await this.prisma.user.findMany({ select: this.userSelect });
   }
 
-  async findOne(id: string): Promise<User> {
+  async findOne(user: User, id: string): Promise<User> {
     const record = await this.prisma.user.findUnique({
       where: { id },
       select: this.userSelect,
     });
 
+    if (!user.isAdmin) {
+      throw new UnauthorizedException(
+        'Acesso negado: Sua conta não é do tipo Admin!',
+      );
+    }
+
     if (!record) {
-      throw new NotFoundException(`Registro com o ${id} não encontrado.`);
+      throw new NotFoundException(`Usuário não encontrado.`);
     }
 
     return record;
   }
 
+  //
+
   async create(createuserDto: CreateUserDto): Promise<User> {
-    if (createuserDto.password != createuserDto.confirmPassword) {
+    if (createuserDto.password !== createuserDto.confirmPassword) {
       throw new BadRequestException('As senhas informadas não conferem');
     }
 
     delete createuserDto.confirmPassword;
 
-    const user: User = {
+    const data: User = {
       ...createuserDto,
       password: await bcrypt.hash(createuserDto.password, 10),
     };
+
     return this.prisma.user
       .create({
-        data: user,
+        data,
         select: this.userSelect,
       })
       .catch(handleError);
   }
 
-  async update(id: string, updateUserDto: UpdateUserDto): Promise<User> {
-    await this.findOne(id);
+  //
+
+  async update(
+    user: User,
+    id: string,
+    updateUserDto: UpdateUserDto,
+  ): Promise<User> {
+    await this.findOne(user, id);
 
     if (updateUserDto.password) {
-      if (updateUserDto.password != updateUserDto.confirmPassword) {
+      if (updateUserDto.password !== updateUserDto.confirmPassword) {
         throw new BadRequestException('As senhas informadas não conferem');
       }
     }
 
     delete updateUserDto.confirmPassword;
 
-    const data: Partial<User> = { ...updateUserDto };
+    const data: Partial<User> = { ...updateUserDto,
+    isAdmin: updateUserDto.isAdmin,
+   };
 
     if (data.password) {
       data.password = await bcrypt.hash(data.password, 10);
@@ -86,8 +109,16 @@ export class UserService {
     });
   }
 
-  async delete(id: string) {
-    await this.findOne(id);
+  //
+
+  async delete(user: User, id: string) {
+    await this.findOne(user, id);
+
+    if (!user.id) {
+      throw new UnauthorizedException(
+        'Acesso negado: Sua conta não é do tipo Admin!',
+      );
+    }
 
     await this.prisma.user.delete({ where: { id } });
   }

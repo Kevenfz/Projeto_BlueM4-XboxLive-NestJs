@@ -1,9 +1,14 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  Injectable,
+  NotFoundException,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { CreateGeneroDto } from './dto/create-genero.dto';
 import { Genero } from './entities/genero.entities';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { UpdateGeneroDto } from './dto/update-genero.dto';
 import { handleError } from 'src/utils/handle.error.util';
+import { User } from 'src/users/entities/user.entity';
 
 @Injectable()
 export class GeneroService {
@@ -23,7 +28,13 @@ export class GeneroService {
     return record;
   }
 
-  create(createGeneroDto: CreateGeneroDto): Promise<Genero> {
+  create(user: User, createGeneroDto: CreateGeneroDto): Promise<Genero> {
+    if (!user.isAdmin) {
+      throw new UnauthorizedException(
+        'Acesso negado: Tipo de conta não é Admin',
+      );
+    }
+
     const genero = { ...createGeneroDto };
     return this.prisma.genero
       .create({
@@ -32,8 +43,18 @@ export class GeneroService {
       .catch(handleError);
   }
 
-  async update(id: string, updateGeneroDto: UpdateGeneroDto): Promise<Genero> {
+  async update(
+    user: User,
+    id: string,
+    updateGeneroDto: UpdateGeneroDto,
+  ): Promise<Genero> {
     await this.findById(id);
+
+    if (!user.isAdmin) {
+      throw new UnauthorizedException(
+        'Acesso negado: Sua conta não é do tipo Admin!',
+      );
+    }
 
     const data = { ...updateGeneroDto };
 
@@ -43,14 +64,15 @@ export class GeneroService {
     });
   }
 
-  async delete(id: string) {
+  async delete(user: User, id: string) {
     await this.findById(id);
 
-    await this.prisma.genero.delete({ where: { id } });
-  }
+    if (!user.isAdmin) {
+      throw new UnauthorizedException(
+        'Acesso negado: Sua conta não é do tipo Admin!',
+      );
+    }
 
-  handleError(error: Error) {
-    console.log(error.message);
-    return undefined;
+    await this.prisma.genero.delete({ where: { id } });
   }
 }
