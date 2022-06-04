@@ -33,7 +33,7 @@ export class GameController {
   }
 
   @Get(':id')
-  @ApiOperation({ summary: 'Buscar jogos pelo seu ID' })
+  @ApiOperation({ summary: 'Buscar jogos pelo seu ID, apenas contas Admin' })
   findById(@Param('id') id: string) {
     return this.gameService.findById(id);
   }
@@ -45,7 +45,7 @@ export class GameController {
   }
 
   @Patch(':id')
-  @ApiOperation({ summary: 'Atualizar um jogo pelo seu ID' })
+  @ApiOperation({ summary: 'Atualizar um jogo pelo seu ID, apenas contas Admin' })
   update(
     @LoggedUser() user: User,
     @Param('id') id: string,
@@ -56,7 +56,7 @@ export class GameController {
 
   @Delete(':id')
   @HttpCode(HttpStatus.NO_CONTENT)
-  @ApiOperation({ summary: 'Deletar um jogo pelo seu ID' })
+  @ApiOperation({ summary: 'Deletar um jogo pelo seu ID, apenas contas Admin' })
   delete(@LoggedUser() user: User, @Param('id') id: string) {
     this.gameService.delete(user, id);
   }

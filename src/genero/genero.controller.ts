@@ -39,13 +39,13 @@ export class GeneroController {
   }
 
   @Post()
-  @ApiOperation({ summary: 'Criar um genero' })
+  @ApiOperation({ summary: 'Criar um genero, apenas contas Admin' })
   create(@LoggedUser() user: User, @Body() createGeneroDto: CreateGeneroDto) {
     return this.generoService.create(user, createGeneroDto);
   }
 
   @Patch(':id')
-  @ApiOperation({ summary: 'Atualizar um genero pelo seu ID' })
+  @ApiOperation({ summary: 'Atualizar um genero pelo seu ID, apenas contas Admin' })
   update(
     @LoggedUser() user: User,
     @Param('id') id: string,
@@ -56,7 +56,7 @@ export class GeneroController {
 
   @Delete(':id')
   @HttpCode(HttpStatus.NO_CONTENT)
-  @ApiOperation({ summary: 'Deletar um genero pelo seu ID' })
+  @ApiOperation({ summary: 'Deletar um genero pelo seu ID, apenas contas Admin' })
   delete(@LoggedUser() user: User, @Param('id') id: string) {
     this.generoService.delete(user, id);
   }

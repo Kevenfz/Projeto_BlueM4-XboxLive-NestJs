@@ -4,59 +4,42 @@ import {
   UnauthorizedException,
 } from '@nestjs/common';
 import { CreateGameDto } from './dto/create-games.dto';
-import { Game } from './entities/games.entities';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { UpdateGamesDto } from './dto/update-games.dto';
 import { handleError } from 'src/utils/handle.error.util';
 import { Prisma } from '@prisma/client';
 import { User } from 'src/users/entities/user.entity';
 
-//TODO: userSelect para todos os componentes e assim limpar mais o código!!!
-
 @Injectable()
 export class GameService {
+  private gameSelect = {
+    id: true,
+    title: true,
+    imgUrl: true,
+    description: true,
+    year: true,
+    score: true,
+    traillerYtUrl: true,
+    GplayYtUrl: true,
+    genero: {
+      select: {
+        genero: true,
+      },
+    },
+  };
+
   constructor(private readonly prisma: PrismaService) {}
 
   findAll() {
-
     return this.prisma.game.findMany({
-      select: {
-        id: true,
-        title: true,
-        imgUrl: true,
-        description: true,
-        year: true,
-        score: true,
-        traillerYtUrl: true,
-        GplayYtUrl: true,
-        genero: {
-          select: {
-            genero: true,
-          },
-        },
-      },
+      select: this.gameSelect,
     });
   }
 
   async findById(id: string) {
-
     const record = await this.prisma.game.findUnique({
       where: { id },
-      select: {
-        id: true,
-        title: true,
-        imgUrl: true,
-        description: true,
-        year: true,
-        score: true,
-        traillerYtUrl: true,
-        GplayYtUrl: true,
-        genero: {
-          select: {
-            genero: true,
-          },
-        },
-      },
+      select: this.gameSelect,
     });
 
     if (!record) {
@@ -67,7 +50,6 @@ export class GameService {
   }
 
   create(user: User, createGameDto: CreateGameDto) {
-
     if (!user.isAdmin) {
       throw new UnauthorizedException(
         'Acesso negado: Sua conta não é do tipo Admin!',
@@ -92,21 +74,7 @@ export class GameService {
     return this.prisma.game
       .create({
         data,
-        select: {
-          id: true,
-          title: true,
-          imgUrl: true,
-          description: true,
-          year: true,
-          score: true,
-          traillerYtUrl: true,
-          GplayYtUrl: true,
-          genero: {
-            select: {
-              genero: true,
-            },
-          },
-        },
+        select: this.gameSelect,
       })
       .catch(handleError);
   }
@@ -138,22 +106,7 @@ export class GameService {
     return this.prisma.game.update({
       where: { id },
       data,
-      select: {
-        id: true,
-        title: true,
-        imgUrl: true,
-        description: true,
-        year: true,
-        score: true,
-        traillerYtUrl: true,
-        GplayYtUrl: true,
-        genero: {
-          select: {
-            id: true,
-            genero: true,
-          },
-        },
-      },
+      select: this.gameSelect,
     });
   }
 

@@ -8,30 +8,36 @@ import { Prisma } from '@prisma/client';
 
 @Injectable()
 export class PerfilService {
+  private perfilSelect = {
+    user: {
+      select: {
+        id: true,
+        name: true,
+        isAdmin: true,
+      },
+    },
+    id: true,
+    title: true,
+    imgUrl: true,
+    game: {
+      select: {
+        title: true,
+        imgUrl: true,
+        score: true,
+        genero: {
+          select: {
+            genero: true,
+          },
+        },
+      },
+    },
+  };
+
   constructor(private readonly prisma: PrismaService) {}
 
   findAll() {
     return this.prisma.perfil.findMany({
-      select: {
-        id: true,
-        title: true,
-        user: {
-          select: {
-            name: true,
-          },
-        },
-        game: {
-          select: {
-            title: true,
-            imgUrl: true,
-            genero: {
-              select: {
-                genero: true,
-              },
-            },
-          },
-        },
-      },
+      select: this.perfilSelect,
     });
   }
 
@@ -40,22 +46,7 @@ export class PerfilService {
   findById(id: string) {
     return this.prisma.perfil.findUnique({
       where: { id },
-      include: {
-        user: {
-          select: {
-            name: true,
-          },
-        },
-        game: {
-          select: {
-            id: true,
-            title: true,
-            imgUrl: true,
-            description: true,
-            score: true,
-          },
-        },
-      },
+      select: this.perfilSelect,
     });
   }
 
@@ -80,29 +71,7 @@ export class PerfilService {
     return this.prisma.perfil
       .create({
         data,
-        select: {
-          user: {
-            select: {
-              id: true,
-              name: true,
-              isAdmin: true,
-            },
-          },
-          id: true,
-          imgUrl: true,
-          title: true,
-          game: {
-            select: {
-              title: true,
-              imgUrl: true,
-              genero: {
-                select: {
-                  genero: true,
-                },
-              },
-            },
-          },
-        },
+        select: this.perfilSelect,
       })
       .catch(handleError);
   }
@@ -124,22 +93,7 @@ export class PerfilService {
     return this.prisma.perfil.update({
       where: { id },
       data,
-      include: {
-        user: {
-          select: {
-            name: true,
-          },
-        },
-        game: {
-          select: {
-            id: true,
-            title: true,
-            imgUrl: true,
-            description: true,
-            score: true,
-          },
-        },
-      },
+      select: this.perfilSelect,
     });
   }
 

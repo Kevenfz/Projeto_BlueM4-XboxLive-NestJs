@@ -29,6 +29,7 @@ export class GeneroService {
   }
 
   create(user: User, createGeneroDto: CreateGeneroDto): Promise<Genero> {
+
     if (!user.isAdmin) {
       throw new UnauthorizedException(
         'Acesso negado: Tipo de conta não é Admin',

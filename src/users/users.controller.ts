@@ -21,7 +21,7 @@ export class UserController {
   @Get()
   @UseGuards(AuthGuard())
   @ApiBearerAuth()
-  @ApiOperation({summary: 'Listar todos os usuários'})
+  @ApiOperation({summary: 'Listar todos os usuários, apenas contas Admin'})
   findAll(@LoggedUser() user: User) {
     return this.userService.findAll(user);
   }
@@ -29,7 +29,7 @@ export class UserController {
   @Get(':id')
   @UseGuards(AuthGuard())
   @ApiBearerAuth()
-  @ApiOperation({summary: 'Listar um usuário pelo seu ID'})
+  @ApiOperation({summary: 'Listar um usuário pelo seu ID, apenas contas Admin'})
   findOne(@LoggedUser() user: User, @Param('id') id: string) {
     return this.userService.findOne(user, id);
   }
@@ -37,7 +37,7 @@ export class UserController {
   @Patch(':id')
   @UseGuards(AuthGuard())
   @ApiBearerAuth()
-  @ApiOperation({summary: 'Atualizar um usuário pelo seu ID'})
+  @ApiOperation({summary: 'Atualizar um usuário pelo seu ID, apenas contas Admin'})
   update(@LoggedUser() user: User, @Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
     return this.userService.update(user, id, updateUserDto);
   }
@@ -46,7 +46,7 @@ export class UserController {
   @UseGuards(AuthGuard())
   @ApiBearerAuth()
   @HttpCode(HttpStatus.NO_CONTENT)
-  @ApiOperation({summary: 'Deletar um usuário pelo seu ID'})
+  @ApiOperation({summary: 'Deletar um usuário pelo seu ID, apenas contas Admin'})
   delete(@LoggedUser() user: User, @Param('id') id: string) {
     return this.userService.delete(user, id);
   }
