@@ -8,9 +8,6 @@ export const generos: Prisma.GeneroCreateInput[] = [
     genero: 'FPS',
   },
   {
-    genero: 'Aventura',
-  },
-  {
     genero: 'Simulação',
   },
   {

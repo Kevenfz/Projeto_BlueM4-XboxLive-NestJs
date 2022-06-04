@@ -7,7 +7,7 @@ export const users: Prisma.UserCreateInput[] = [
     email: 'keven@gmail.com',
     password: 'Batatinha@123',
     cpf: "111.222.333-66",
-    isAdmin: false,
+    isAdmin: true,
   },
   {
     name: 'Diana Coelho',

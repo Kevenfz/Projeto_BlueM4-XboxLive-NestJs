@@ -114,12 +114,6 @@ export class UserService {
   async delete(user: User, id: string) {
     await this.findOne(user, id);
 
-    if (!user.id) {
-      throw new UnauthorizedException(
-        'Acesso negado: Sua conta não é do tipo Admin!',
-      );
-    }
-
     await this.prisma.user.delete({ where: { id } });
   }
 }
