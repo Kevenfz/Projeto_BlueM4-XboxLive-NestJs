@@ -11,6 +11,8 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import * as bcrypt from 'bcrypt';
 import { handleError } from 'src/utils/handle.error.util';
 
+//TODO: DOCUMENTAÇÃO E CRIAÇÃO DAS TABELAS NO BANCO DO RAILWAY PARA TESTES, NÃO ESTÁ FUNCIONANDO O SWAGGER PELO SITE
+
 @Injectable()
 export class UserService {
   private userSelect = {
