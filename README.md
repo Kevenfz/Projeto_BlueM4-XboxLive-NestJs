@@ -1,73 +1,73 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+# XboxLive
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+Back-end desenvolvido em NestJs para integração com o Front. Afim de simular a loja online da Xbox Live.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## Instalação
 
-## Description
+Para instalar e configurar corretamente este projeto é bem simples, siga o exemplo abaixo com os comandos indicados.
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+> Clone esse projeto em seu computador com o comando:
+> ```
+> git clone [https://github.com/Kevenfz/Projeto_BlueM4-XboxLive.git]
+> ```
+> Acesse a pasta do projeto seu terminal:
+> ```
+> 	cd [Projeto_BlueM4-XboxLive]
+> ```
+> Já pasta da aplicação em seu terminal, digite o seguinte comando:
+> ```
+> 	npm install ou npm i
+> ```
 
-## Installation
+## Execução
 
-```bash
-$ npm install
-```
+Para executar o projeto, abra seu terminal com o atalho Crtl + '.
 
-## Running the app
+>
+> Após ter configurado o projeto e ter aguardado a instalação das dependencias de desenvolvimento, execute o comando:
+> ```
+>#desenvolvimento
+>
+>npm run start
+> ```
+>
+>```
+>#modoDeVisualização
+>
+>npm run start:dev
+>
+>```
+> A aplicação estará disponível para visualização em seu navegador, caso isso não aconteça automaticamente abre o navegador no seguinte endereço: _localhost:3555_
+>
 
-```bash
-# development
-$ npm run start
+## Funcionalidades
 
-# watch mode
-$ npm run start:dev
+Esta API foi desenvolvida com o intuito de simular um loja virtual de jogos. Aplicação construída com NestJs, Typescript, Prisma e o banco de dados Postgres. Para testar e conhecer toda a funcionalidade desta aplicação, acesse a documentação do Swagger.
+>
+> Este projeto visa as funcionalidades:
+> - CRUD completo;
+> - Permissão e Autenticação;
+> - Swagger;
+> - Criação de usuarios, jogos, generos e perfis para contas Admin;
 
-# production mode
-$ npm run start:prod
-```
 
-## Test
 
-```bash
-# unit tests
-$ npm run test
+## Autores
 
-# e2e tests
-$ npm run test:e2e
+Informe o nome das pessoas envolvidas no desenvolvimento do projeto e se quiser atribua as respectivas redes sociais para contato da comunidade;
 
-# test coverage
-$ npm run test:cov
-```
 
-## Support
+> - **Keven Ferreira Moraes** - Estudante de programação FullStack na BlueEdTech - [Github](https://github.com/Kevenfz) | [Instagram](https://www.instagram.com/kevenfz_/)
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
 
-## Stay in touch
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+## Licença
 
-## License
+>
+> - [MIT licensed](LICENSE)
 
-Nest is [MIT licensed](LICENSE).
+## Agradecimentos
+
+Este projeto foi desenvolvido graças ao auxílio dos meus professores do 4º modulo da BlueEdTech, Isabella e Vinicius,que me auxiliaram e me deram as direções necessárias nos momentos certos!
+
+---
