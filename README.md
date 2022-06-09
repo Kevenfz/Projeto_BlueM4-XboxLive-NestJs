@@ -51,6 +51,12 @@ Esta API foi desenvolvida com o intuito de simular um loja virtual de jogos. Apl
 > - Criação de usuarios, jogos, generos e perfis para contas Admin;
 
 
+## Link do deploy Railway
+
+Link deploy:
+>
+> https://projetobluem4-xboxlive-production.up.railway.app
+
 
 ## Autores
 
@@ -62,7 +68,6 @@ Informe o nome das pessoas envolvidas no desenvolvimento do projeto e se quiser 
 
 
 ## Licença
-
 >
 > - [MIT licensed](LICENSE)
 
