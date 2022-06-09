@@ -43,12 +43,14 @@ Para executar o projeto, abra seu terminal com o atalho Crtl + '.
 ## Funcionalidades
 
 Esta API foi desenvolvida com o intuito de simular um loja virtual de jogos. Aplicação construída com NestJs, Typescript, Prisma e o banco de dados Postgres. Para testar e conhecer toda a funcionalidade desta aplicação, acesse a documentação do Swagger.
->
+>```
 > Este projeto visa as funcionalidades:
 > - CRUD completo;
 > - Permissão e Autenticação;
-> - Swagger;
+> - Swagger:
 > - Criação de usuarios, jogos, generos e perfis para contas Admin;
+>```
+>Para acessar a conta "Admin" pelo Swagger, faça login com email: keven@gmail.com senha: Batatinha@123;
 
 
 ## Link do deploy Railway
