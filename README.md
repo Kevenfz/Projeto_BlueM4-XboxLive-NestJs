@@ -12,11 +12,11 @@ Para instalar e configurar corretamente este projeto é bem simples, siga o exem
 > ```
 > Acesse a pasta do projeto seu terminal:
 > ```
-> 	cd [Projeto_BlueM4-XboxLive]
+>cd [Projeto_BlueM4-XboxLive]
 > ```
 > Já pasta da aplicação em seu terminal, digite o seguinte comando:
 > ```
-> 	npm install ou npm i
+>npm install ou npm i
 > ```
 
 ## Execução
