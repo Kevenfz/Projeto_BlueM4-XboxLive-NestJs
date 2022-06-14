@@ -1,6 +1,6 @@
 # XboxLive
 
-Back-end desenvolvido em NestJs para integração com o Front. Afim de simular a loja online da Xbox Live.
+Back-end desenvolvido em NestJs para integração com o Front, afim de simular a loja online da Xbox Live.
 
 ## Instalação
 
