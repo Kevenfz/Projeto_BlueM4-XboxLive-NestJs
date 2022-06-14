@@ -75,6 +75,6 @@ Informe o nome das pessoas envolvidas no desenvolvimento do projeto e se quiser 
 
 ## Agradecimentos
 
-Este projeto foi desenvolvido graças ao auxílio dos meus professores do 4º modulo da BlueEdTech, Isabella e Vinicius,que me auxiliaram e me deram as direções necessárias nos momentos certos!
+Este projeto foi desenvolvido graças ao auxílio dos meus professores do 4º modulo da BlueEdTech, Isabella e Vinicius, que me auxiliaram e me deram as direções necessárias nos momentos certos!
 
 ---
