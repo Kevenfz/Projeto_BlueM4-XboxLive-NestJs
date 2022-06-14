@@ -47,7 +47,7 @@ export class UserController {
   @ApiBearerAuth()
   @HttpCode(HttpStatus.NO_CONTENT)
   @ApiOperation({summary: 'Deletar um usuário pelo seu ID, apenas contas Admin'})
-  delete(@LoggedUser() user: User, @Param('id') id: string) {
-    return this.userService.delete(user, id);
+  delete(@Param('id') id: string) {
+    return this.userService.delete(id);
   }
 }

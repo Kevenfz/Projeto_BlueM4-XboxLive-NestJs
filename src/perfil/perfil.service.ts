@@ -61,11 +61,11 @@ export class PerfilService {
       },
       title: createPerfilDto.title,
       imgUrl: createPerfilDto.imgUrl,
-      game: {
-        connect: createPerfilDto.games.map((gameId) => ({
-          id: gameId,
-        })),
-      },
+      // game: {
+      //   connect: createPerfilDto.games.map((gameId) => ({
+      //     id: gameId,
+      //   })),
+      // },
     };
 
     return this.prisma.perfil

@@ -94,9 +94,10 @@ export class UserService {
 
     delete updateUserDto.confirmPassword;
 
-    const data: Partial<User> = { ...updateUserDto,
-    isAdmin: updateUserDto.isAdmin,
-   };
+    const data: Partial<User> = {
+      ...updateUserDto,
+      isAdmin: updateUserDto.isAdmin,
+    };
 
     if (data.password) {
       data.password = await bcrypt.hash(data.password, 10);
@@ -111,9 +112,17 @@ export class UserService {
 
   //
 
-  async delete(user: User, id: string) {
-    await this.findOne(user, id);
+  async delete(id: string) {
+    await this.prisma.perfil.deleteMany({
+      where: {
+        userId: id,
+      },
+    });
 
-    await this.prisma.user.delete({ where: { id } });
+    await this.prisma.user.delete({
+      where: {
+        id
+      }
+    })
   }
 }
