@@ -20,7 +20,7 @@ import { LoggedUser } from './logged-user.decorator';
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
-  @Post()
+  @Post('/login')
   @HttpCode(HttpStatus.OK)
   @ApiOperation({
     summary: 'Realizar login, recebendo um token de autenticação',
