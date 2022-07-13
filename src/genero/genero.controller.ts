@@ -38,7 +38,7 @@ export class GeneroController {
     return this.generoService.findById(id);
   }
 
-  @Post('/reg-gender')
+  @Post('/create')
   @ApiOperation({ summary: 'Criar um genero, apenas contas Admin' })
   create(@LoggedUser() user: User, @Body() createGeneroDto: CreateGeneroDto) {
     return this.generoService.create(user, createGeneroDto);

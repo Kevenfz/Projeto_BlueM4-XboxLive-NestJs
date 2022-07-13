@@ -29,7 +29,7 @@ export class AuthController {
     return this.authService.login(loginDto);
   }
 
-  @Get()
+  @Get('/findUser')
   @UseGuards(AuthGuard())
   @ApiOperation({
     summary: 'Retornar o usuario logado na aplicaçãoneste momento',

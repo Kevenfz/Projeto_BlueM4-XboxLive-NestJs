@@ -38,7 +38,7 @@ export class PerfilController {
     return this.perfilService.findById(id);
   }
 
-  @Post('/reg-profile')
+  @Post('/create')
   @ApiOperation({ summary: 'Criar um Perfil' })
   create(@LoggedUser() user: User, @Body() createPerfilDto: CreatePerfilDto) {
     return this.perfilService.create(user.id, createPerfilDto);

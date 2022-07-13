@@ -38,7 +38,7 @@ export class GameController {
     return this.gameService.findById(id);
   }
 
-  @Post('/reg-game')
+  @Post('/create')
   @ApiOperation({ summary: 'Criar um jogo' })
   create(@LoggedUser() user: User, @Body() createGameDto: CreateGameDto) {
     return this.gameService.create(user, createGameDto);
