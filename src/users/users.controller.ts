@@ -12,13 +12,13 @@ import { User } from './entities/user.entity';
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
-  @Post()
+  @Post('/reg-user')
   @ApiOperation({summary: 'Criar um usuário'})
   create(@Body() createUserDto: CreateUserDto) {
     return this.userService.create(createUserDto);
   }
 
-  @Get()
+  @Get('/find-all')
   @UseGuards(AuthGuard())
   @ApiBearerAuth()
   @ApiOperation({summary: 'Listar todos os usuários, apenas contas Admin'})
@@ -26,7 +26,7 @@ export class UserController {
     return this.userService.findAll(user);
   }
 
-  @Get(':id')
+  @Get('/findById/:id')
   @UseGuards(AuthGuard())
   @ApiBearerAuth()
   @ApiOperation({summary: 'Listar um usuário pelo seu ID, apenas contas Admin'})
@@ -34,7 +34,7 @@ export class UserController {
     return this.userService.findOne(user, id);
   }
 
-  @Patch(':id')
+  @Patch('/updateById/:id')
   @UseGuards(AuthGuard())
   @ApiBearerAuth()
   @ApiOperation({summary: 'Atualizar um usuário pelo seu ID, apenas contas Admin'})
@@ -42,7 +42,7 @@ export class UserController {
     return this.userService.update(user, id, updateUserDto);
   }
 
-  @Delete(':id')
+  @Delete('/delete/:id')
   @UseGuards(AuthGuard())
   @ApiBearerAuth()
   @HttpCode(HttpStatus.NO_CONTENT)

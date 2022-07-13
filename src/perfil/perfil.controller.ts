@@ -26,25 +26,25 @@ import { User } from '@prisma/client';
 export class PerfilController {
   constructor(private perfilService: PerfilService) {}
 
-  @Get()
+  @Get('/find-all')
   @ApiOperation({ summary: 'Listar todos os Perfis' })
   findAll() {
     return this.perfilService.findAll();
   }
 
-  @Get(':id')
+  @Get('/findById/:id')
   @ApiOperation({ summary: 'Buscar Perfis pelo seu ID' })
   findById(@Param('id') id: string) {
     return this.perfilService.findById(id);
   }
 
-  @Post()
+  @Post('/reg-profile')
   @ApiOperation({ summary: 'Criar um Perfil' })
   create(@LoggedUser() user: User, @Body() createPerfilDto: CreatePerfilDto) {
     return this.perfilService.create(user.id, createPerfilDto);
   }
 
-  @Patch(':id')
+  @Patch('/updateById/:id')
   @ApiOperation({
     summary:
       'Atualizar um Perfil pelo seu ID. Possibilidade de remover os jogos favoritados',
@@ -53,7 +53,7 @@ export class PerfilController {
     return this.perfilService.update(id, updatePerfilDto);
   }
 
-  @Delete(':id')
+  @Delete('/delete/:id')
   @HttpCode(HttpStatus.NO_CONTENT)
   @ApiOperation({ summary: 'Deletar um Perfil pelo seu ID' })
   delete(@Param('id') id: string) {

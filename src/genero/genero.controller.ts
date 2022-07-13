@@ -26,25 +26,25 @@ import { User } from 'src/users/entities/user.entity';
 export class GeneroController {
   constructor(private generoService: GeneroService) {}
 
-  @Get()
+  @Get('/find-all')
   @ApiOperation({ summary: 'Listar todos os generos' })
   findAll() {
     return this.generoService.findAll();
   }
 
-  @Get(':id')
+  @Get('/findById/:id')
   @ApiOperation({ summary: 'Buscar generos pelo seu ID' })
   findById(@Param('id') id: string): Promise<Genero> {
     return this.generoService.findById(id);
   }
 
-  @Post()
+  @Post('/reg-gender')
   @ApiOperation({ summary: 'Criar um genero, apenas contas Admin' })
   create(@LoggedUser() user: User, @Body() createGeneroDto: CreateGeneroDto) {
     return this.generoService.create(user, createGeneroDto);
   }
 
-  @Patch(':id')
+  @Patch('/updateById/:id')
   @ApiOperation({ summary: 'Atualizar um genero pelo seu ID, apenas contas Admin' })
   update(
     @LoggedUser() user: User,
@@ -54,7 +54,7 @@ export class GeneroController {
     return this.generoService.update(user, id, updateGeneroDto);
   }
 
-  @Delete(':id')
+  @Delete('/delete/:id')
   @HttpCode(HttpStatus.NO_CONTENT)
   @ApiOperation({ summary: 'Deletar um genero pelo seu ID, apenas contas Admin' })
   delete(@LoggedUser() user: User, @Param('id') id: string) {

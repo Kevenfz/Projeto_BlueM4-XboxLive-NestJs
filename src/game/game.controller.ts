@@ -26,25 +26,25 @@ import { User } from 'src/users/entities/user.entity';
 export class GameController {
   constructor(private gameService: GameService) {}
 
-  @Get()
+  @Get('/find-all')
   @ApiOperation({ summary: 'Listar todos os jogos' })
   findAll() {
     return this.gameService.findAll();
   }
 
-  @Get(':id')
+  @Get('/findById/:id')
   @ApiOperation({ summary: 'Buscar jogos pelo seu ID, apenas contas Admin' })
   findById(@Param('id') id: string) {
     return this.gameService.findById(id);
   }
 
-  @Post()
+  @Post('/reg-game')
   @ApiOperation({ summary: 'Criar um jogo' })
   create(@LoggedUser() user: User, @Body() createGameDto: CreateGameDto) {
     return this.gameService.create(user, createGameDto);
   }
 
-  @Patch(':id')
+  @Patch('/updateById/:id')
   @ApiOperation({ summary: 'Atualizar um jogo pelo seu ID, apenas contas Admin' })
   update(
     @LoggedUser() user: User,
@@ -54,7 +54,7 @@ export class GameController {
     return this.gameService.update(user, id, updateGameDto);
   }
 
-  @Delete(':id')
+  @Delete('/delete/:id')
   @HttpCode(HttpStatus.NO_CONTENT)
   @ApiOperation({ summary: 'Deletar um jogo pelo seu ID, apenas contas Admin' })
   delete(@LoggedUser() user: User, @Param('id') id: string) {
