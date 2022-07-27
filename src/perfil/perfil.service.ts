@@ -83,11 +83,6 @@ export class PerfilService {
     const data: Prisma.PerfilUpdateInput = {
       title: updatePerfilDto.title,
       imgUrl: updatePerfilDto.imgUrl,
-      game: {
-        connect: updatePerfilDto.games.map((gameId) => ({
-          id: gameId,
-        })),
-      },
     };
 
     return this.prisma.perfil.update({
